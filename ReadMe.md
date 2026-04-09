@@ -17,3 +17,6 @@
 The FastAPI-based backend application receives webhooks from Grafana. It parses these requests, formats them into a readable format, and saves event information to the log. A TrueConf bot runs in parallel, scanning the log file every few seconds and separately scanning the contact list and the on-duty list for the current date. It then sends a notification message containing the alert name and metric value (sent during business hours). A duplicate filtering system prevents spam from repeated alerts. User registration is also available; there's no need to create or delete contacts manually—everything is handled through the user-bot dialogue: you can add or remove yourself from the mailing list. Notifications come from the systems listed as primary in the Grafana header. Alerts are generated based on preset time intervals and background execution of SQL queries defined in Grafana. A separate alert is created for packages that have been running for over half an hour.
 
 **Technologies used: Python (FastAPI + Uvicorn, Python-TrueConf-Bot, Pandas/Openpyxl), MSSQL.**
+
+
+![Window](https://github.com/Demston/https://github.com/Demston/TrueConf_Alert_Bot/blob/main/BotScreen.png.png)
