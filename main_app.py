@@ -38,7 +38,7 @@ async def handle_grafana(request: Request):
             last_send_time = sent_alerts.get(f"{fingerprint}_last_ts", 0)
 
             # Если статус тот же и прошло меньше 9 минут — игнорим
-            # Это не даст заспамить 10ю сообщениями сразу, но пропустит повтор через 10 минут
+            # Это не даст заспамить десятком сообщений сразу, но пропустит повтор через 10 минут
             if sent_alerts.get(fingerprint) == 'firing' and (now_ts - last_send_time < 540):
                 continue
 
