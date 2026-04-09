@@ -1,6 +1,4 @@
 .env
 GrafanaSettings.md
-/cache/*
-/contacts/*
 !/cache/.gitkeep
 !/contacts/.gitkeep
