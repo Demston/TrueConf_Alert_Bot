@@ -19,4 +19,4 @@ The FastAPI-based backend application receives webhooks from Grafana. It parses 
 **Technologies used: Python (FastAPI + Uvicorn, Python-TrueConf-Bot, Pandas/Openpyxl), MSSQL.**
 
 
-![Window](https://github.com/Demston/https://github.com/Demston/TrueConf_Alert_Bot/blob/main/BotScreen.png.png)
+![Window](https://github.com/Demston/TrueConf_Alert_Bot/blob/main/BotScreen.png)
