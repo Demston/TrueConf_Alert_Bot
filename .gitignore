@@ -1,0 +1,4 @@
+.env
+GrafanaSettings.md
+/cache/*
+/contacts/*
