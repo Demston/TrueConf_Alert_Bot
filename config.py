@@ -6,7 +6,7 @@ load_dotenv()
 # Getting data from .env / Получение данных из .env
 TC_BOT_USER = os.getenv("TC_BOT_USER")
 TC_BOT_PASS = os.getenv("TC_BOT_PASS")
-TC_URL = os.getenv("TC_URL")  # Адрес сервера
+TC_URL = os.getenv("TC_URL")  # Server address / Адрес сервера
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # Application folder / Папка с приложением
 
