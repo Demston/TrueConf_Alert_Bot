@@ -1,4 +1,4 @@
-## ENG. Alert system for critical system statuses. A bot for sending alerts from Grafana to TrueConf.
+## [ENG] Alert system for critical system statuses. A bot for sending alerts from Grafana to TrueConf.
 
 **The project consists of two parallel processes: main_app (the backend for data exchange between Grafana and the bot) and true_bot (the bot for alerts).**
 
@@ -8,7 +8,7 @@ The FastAPI-based backend application receives webhooks from Grafana. It parses 
 
 ---
 
-## RU. Система оповещений по критическим статусам систем. Бот для отправки алертов из Grafana в TrueConf. 
+## [RU] Система оповещений по критическим статусам систем. Бот для отправки алертов из Grafana в TrueConf. 
 
 **Проект состоит из двух параллельно работающих процессов: main_app (бэкенд для обмена данными между Графаной и ботом) и true_bot (бот для оповещений).**
 
