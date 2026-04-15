@@ -52,7 +52,7 @@ async def check_alerts():
                 # Подготовка данных (делаем один раз для всей пачки алертов)
                 duties_list = duties_today()
                 if not duties_list:
-                    print(f"{datetime.now().strftime('%H:%M:%S')} | [!] Список дежурных пуст. Пропускаю.")
+                    print(f"{datetime.now().strftime('%H:%M:%S')} | [!] Empty duties list")
                     continue
 
                 with open(CONTACTS_NAMES, 'r', encoding='utf-8') as f:

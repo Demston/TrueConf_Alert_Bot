@@ -54,7 +54,7 @@ async def handle_grafana(request: Request):
             save_cache(sent_alerts)
 
             # Parsing / Парсинг
-            values = alert.get('values') or {}  # Вытаскиваем только имя и цифру
+            values = alert.get('values') or {}  # Get name and num only / Вытаскиваем только имя и цифру
             val = values.get('B', values.get('A', 0))  # Пробуем взять B (Reduce) или A (SQL), если пусто — 0
             # Skip the alert with zero and move on through the cycle. / Пропускаем алёрт с нулём и идем дальше по циклу
             if val == 0:
@@ -68,7 +68,7 @@ async def handle_grafana(request: Request):
             log_line = full_message.replace('\n', ' | ')  # separator for the log / разделитель для лога
             with open(LOG_FILE, 'a', encoding='utf-8') as f:
                 f.write(log_line + "\n")
-                f.flush()  # сбросить данные из памяти на диск прямо сейчас
+                f.flush()  # flush data from memory to disk right now / сбросить данные из памяти на диск прямо сейчас
 
             print(f"{cur_time}, {log_line}")
 
