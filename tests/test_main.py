@@ -21,6 +21,6 @@ def test_grafana_webhook_success(grafana_payload):
 
 
 def test_webhook_invalid_json(grafana_payload):
-    """Send json / Отправляем json"""
+    """Send JSON / Отправляем JSON"""
     response = client.post("/webhook/grafana", json=grafana_payload)
     assert response.status_code != 500
