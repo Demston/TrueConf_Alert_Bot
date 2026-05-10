@@ -21,4 +21,4 @@ ENV/
 .pytest_cache/
 
 # Logs
-.log
+*.log
