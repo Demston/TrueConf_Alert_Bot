@@ -1,4 +1,5 @@
 import json
+import logging
 from config import CONTACTS, CONTACTS_NAMES
 
 
@@ -32,7 +33,7 @@ def user_reg(chat_message, author_id, chat_id):
             # Only overwrite the file if new data has been added / Перезаписываем файл только если добавили новые данные
             with open(CONTACTS, 'w', encoding='utf-8') as file1:
                 json.dump(data1, file1, ensure_ascii=False, indent=4)
-            print(f"Пользователь {author_id} добавлен в первый словарь")  # User {} added to the first dictionary
+            logging.info(f"Пользователь {author_id} добавлен в первый словарь")  # User {} added to the first dictionary
             # Checking the user's presence / Проверяем наличие пользователя
             if user_name not in data2:  # chat_message[:-2] - it's a name / это ФИО
                 data2[chat_id] = user_name
@@ -40,14 +41,14 @@ def user_reg(chat_message, author_id, chat_id):
                 with open(CONTACTS_NAMES, 'w', encoding='utf-8') as file2:
                     json.dump(data2, file2, ensure_ascii=False, indent=4)
                 # User {} ({}) added to the second dictionary
-                print(f"Пользователь {author_id} ({user_name}) добавлен во второй словарь")
+                logging.info(f"Пользователь {author_id} ({user_name}) добавлен во второй словарь")
             # Your login {} has been added to the incident mailing list as {}
             # If you suddenly want to disable it, just send me a message
             return (f'Твой логин {author_id} добавлен в рассылку инцидентов как {user_name}\n'
                     f'Если, вдруг, захочешь её отключить, просто пришли "-"')
         else:
             # "User {} already exists, dict has not been modified
-            print(f"Пользователь {author_id} уже есть, справочник не изменен.")
+            logging.info(f"Пользователь {author_id} уже есть, справочник не изменен.")
             # UZ {} is already in the mailing list. Send a "-" if you suddenly want to disable it.
             return f'УЗ {author_id} уже есть в рассылке. Пришли "-", если, вдруг, захочешь её отключить.'
 
@@ -57,21 +58,21 @@ def user_reg(chat_message, author_id, chat_id):
             # Overwriting the file / Перезаписываем файл
             with open(CONTACTS, 'w', encoding='utf-8') as f:
                 json.dump(data1, f, ensure_ascii=False, indent=4)
-            print(f"Пользователь {author_id} удален из справочника 1")  # User {} has been removed from dict 1
+            logging.info(f"Пользователь {author_id} удален из справочника 1")  # User {} has been removed from dict 1
             fio = data2[chat_id]  # Add name to the variable / добавим ФИО в переменную, чтоб отчитаться об удалении
             del data2[chat_id]
             # Overwriting the file / Перезаписываем файл
             with open(CONTACTS_NAMES, 'w', encoding='utf-8') as f:
                 json.dump(data2, f, ensure_ascii=False, indent=4)
-            print(f"Пользователь {author_id} ({fio}) удален из справочника 2")  # User {}{} has been removed from dict 2
+            logging.info(f"Пользователь {author_id} ({fio}) удален из справочника 2")  # User {}{} has been removed from dict 2
             return f'УЗ {author_id} ({fio}) исключена из рассылки'  # UZ {} ({}) has been excluded from the mailing list
         else:
-            print(f"Пользователь {author_id} не состоит в рассылке.")  # User {} is not a member of the mailing list
+            logging.info(f"Пользователь {author_id} не состоит в рассылке.")  # User {} is not a member of the mailing list
             return f'УЗ {author_id} не состоит в рассылке.'  # UZ {author_id} is not a member of the mailing list
 
     else:
         if author_id in data1:
-            print(f"{data2[chat_id]}: {chat_message}")
+            logging.info(f"{data2[chat_id]}: {chat_message}")
             # (Reminder: the mailing list is disabled by the message "-")
             return f'{chat_message} © {data2[chat_id]}\n(Напоминание: рассылка отключается сообщением "-")'
         else:

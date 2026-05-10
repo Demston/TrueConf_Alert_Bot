@@ -10,6 +10,18 @@ import json
 from config import *
 from modules.editusers import user_reg
 from modules.duties import duties_today
+import logging
+
+
+# Logging settings
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler("logs\\bot.log"),  # to file
+        logging.StreamHandler()          # to console
+    ]
+)
 
 
 # Router and Dispatcher instances, connect / Экземпляры Router и Dispatcher, подключаем
@@ -52,7 +64,7 @@ async def check_alerts():
                 # Подготовка данных (делаем один раз для всей пачки алертов)
                 duties_list = duties_today()
                 if not duties_list:
-                    print(f"{datetime.now().strftime('%H:%M:%S')} | [!] Список дежурных пуст. Пропускаю.")
+                    logging.info(f"{datetime.now().strftime('%H:%M:%S')} | [!] Список дежурных пуст. Пропускаю.")
                     continue
 
                 with open(CONTACTS_NAMES, 'r', encoding='utf-8') as f:
@@ -72,12 +84,12 @@ async def check_alerts():
                             try:
                                 await bot.send_message(chat_id, clean_msg)
                                 # Short success log / Короткий лог успеха
-                                print(f"{datetime.now().strftime('%H:%M:%S')} | [OK] Send to {user_name}: {msg[:30]}...")
+                                logging.info(f"{datetime.now().strftime('%H:%M:%S')} | [OK] Send to {user_name}: {msg[:30]}...")
                             except Exception as send_error:
-                                print(f"{datetime.now().strftime('%H:%M:%S')} | [!] Error sending for {user_name}: {send_error}")
+                                logging.info(f"{datetime.now().strftime('%H:%M:%S')} | [!] Error sending for {user_name}: {send_error}")
 
             except Exception as e:
-                print(f"{datetime.now().strftime('%H:%M:%S')} | [!] Error in check_alerts: {e}")
+                logging.info(f"{datetime.now().strftime('%H:%M:%S')} | [!] Error in check_alerts: {e}")
 
         # Pause for rapid response / Пауза для оперативного реагирования
         await asyncio.sleep(1)
@@ -89,5 +101,5 @@ async def main():
     await bot.run()  # Launching the bot (echo mode and session) / Запускаем бота (эхо-режим и сессия)
 
 if __name__ == "__main__":
-    print('Bot running . . .')
+    logging.info('Bot is running . . .')
     asyncio.run(main())

@@ -1,6 +1,7 @@
 import pandas as pd
 from datetime import datetime
 from config import DUTIES_FILE, COLS_INDICES
+import logging
 # The openpyxl library is required, pandas calls it. / Обязательно нужна библиотека openpyxl, pandas обращается к ней
 
 duties_date, emp_main, emp_assistant = 'duties_date', 'emp_main', 'emp_assistant'
@@ -27,8 +28,8 @@ def duties_today():
     if not current_duty.empty:
         first = current_duty.iloc[0][emp_main]
         second = current_duty.iloc[0][emp_assistant]
-        print(f"Сегодня дежурят: {first} и {second}")  # On duty today
+        logging.info(f"Сегодня дежурят: {first} и {second}")  # On duty today
         return [first, second]
     else:
-        print("Сегодня никто не дежурит.")  # There is no one on duty today.
+        logging.info("Сегодня никто не дежурит.")  # There is no one on duty today.
         return []

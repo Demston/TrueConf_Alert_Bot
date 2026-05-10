@@ -5,7 +5,18 @@ from datetime import datetime
 from fastapi import FastAPI, Request
 from config import *
 from modules.grafanabuffer import load_cache, save_cache
+import logging
 
+
+# Logging settings
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler("logs\\backend.log"),  # to file
+        logging.StreamHandler()              # to console
+    ]
+)
 
 app = FastAPI()
 
@@ -70,11 +81,12 @@ async def handle_grafana(request: Request):
                 f.write(log_line + "\n")
                 f.flush()  # сбросить данные из памяти на диск прямо сейчас
 
-            print(f"{cur_time}, {log_line}")
+            logging.info(f"{cur_time}, {log_line}")
 
     return {"status": "ok"}
 
 
 if __name__ == "__main__":
     import uvicorn
+    logging.info('Server is running . . .')
     uvicorn.run(app, host="0.0.0.0", port=5000)
