@@ -1,4 +1,21 @@
-.env
+# Project files
 GrafanaSettings.md
 !/cache/.gitkeep
 !/contacts/.gitkeep
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environments
+venv/
+ENV/
+.env
+
+# PyCharm / IDE
+.idea/
+.vscode/
+
+# Testing
+.pytest_cache/
