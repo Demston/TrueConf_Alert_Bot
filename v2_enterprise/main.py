@@ -7,7 +7,7 @@ import websockets
 
 async def main():
 
-    # Bot init
+    # Bot Init
     app = AppState()
     app.init_bot()
 
