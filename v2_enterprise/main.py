@@ -7,7 +7,7 @@ import websockets
 
 async def main():
 
-    # Bot Init
+    # bot init
     app = AppState()
     app.init_bot()
 
@@ -16,8 +16,9 @@ async def main():
 
     await app.broker.start()
 
-    logger.info("Bot is running . . .")    # Авто-реанимация
+    logger.info("Bot is running . . .")
 
+    # auto-repair
     while True:
         try:
             await app.trueconf_bot.run()
@@ -26,7 +27,7 @@ async def main():
             logger.error(f"Connection lost (Error: {e})")
             logger.info("Next attempt after 30 seconds . . .")
 
-            app.is_ready = False    # флаг готовности в офлайн-режиме
+            app.is_ready = False    # offline ready flag
             await asyncio.sleep(30)
 
 
