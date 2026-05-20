@@ -1,24 +1,18 @@
-<<<<<<< HEAD
 gitignore
 
-# Specific
-=======
-# Project files
->>>>>>> ab9d77d42ed5a21ee39a2c31a9ecc426f2f5dfba
-GrafanaSettings.md
-!/cache/.gitkeep
-!/contacts/.gitkeep
+# Project Folders
+**/logs/*
+!**/logs/.gitkeep
+**/contacts/*
+!**/contacts/.gitkeep
+**/cache/*
+!**/cache/.gitkeep
 
-<<<<<<< HEAD
 # Byte code
-=======
-# Byte-compiled / optimized / DLL files
->>>>>>> ab9d77d42ed5a21ee39a2c31a9ecc426f2f5dfba
 __pycache__/
 *.py[cod]
 *$py.class
 
-<<<<<<< HEAD
 # Venv
 venv/
 .venv/
@@ -51,19 +45,3 @@ Thumbs.db
 .coverage
 htmlcov/
 .mypy_cache/
-=======
-# Environments
-venv/
-ENV/
-.env
-
-# PyCharm / IDE
-.idea/
-.vscode/
-
-# Testing
-.pytest_cache/
-
-# Logs
-*.log
->>>>>>> ab9d77d42ed5a21ee39a2c31a9ecc426f2f5dfba
