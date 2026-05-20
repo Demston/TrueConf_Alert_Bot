@@ -1,6 +1,7 @@
 import os
 import json
 from config import CACHE_FILE
+import logging
 
 
 def load_cache():
@@ -13,7 +14,7 @@ def load_cache():
                     return {}
                 return json.loads(content)
         except (json.JSONDecodeError, Exception) as e:
-            print(f"--- [!] Битый кэш: {e} ---")
+            logging.info(f"--- [!] Битый кэш: {e} ---")
             return {}
     return {}
 
