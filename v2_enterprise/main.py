@@ -18,7 +18,7 @@ async def main():
 
     logger.info("Bot is running . . .")
 
-    # auto-repair
+    # auto repair
     while True:
         try:
             await app.trueconf_bot.run()
