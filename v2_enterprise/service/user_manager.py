@@ -45,7 +45,7 @@ class UserManager:
                 return (f'Твой логин {author_id} вновь включён в рассылку инцидентов как {user_name}.\n'
                         f'/help - помощь\n/profile - профиль')
 
-        author_id_cut = author_id.split('@')[0]  # возьмем AD-логин
+        author_id_cut = author_id.split('@')[0]  # get AD login
         author_id_cut = author_id_cut.strip()
         duty_record = db.query(Duties).filter(Duties.LoginMain == author_id_cut).first()
         if duty_record:
