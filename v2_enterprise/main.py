@@ -15,7 +15,7 @@ async def main():
     await broker_handlers_register.register_all_broker_handlers(app)
 
     logger.info("Broker is running . . .")
-    asyncio.create_task(app.broker.start())     # запускаем в фоне
+    asyncio.create_task(app.broker.start())
 
     logger.info("Bot is running . . .")
     # auto repair
