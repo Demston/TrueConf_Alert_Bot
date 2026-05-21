@@ -7,9 +7,8 @@ import websockets
 
 async def main():
 
-    # bot init
     app = AppState()
-    app.init_bot()
+    app.init_bot()    # bot init
 
     await bot_handlers_register.register_all_handlers(app)
     await broker_handlers_register.register_all_broker_handlers(app)
@@ -18,8 +17,8 @@ async def main():
     asyncio.create_task(app.broker.start())
 
     logger.info("Bot is running . . .")
-    # auto repair
-    while True:
+
+    while True:    # auto repair
         try:
             await app.trueconf_bot.run()
 
