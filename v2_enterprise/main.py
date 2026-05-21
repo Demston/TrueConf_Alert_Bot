@@ -5,19 +5,10 @@ from handler import bot_handlers_register, broker_handlers_register
 import websockets
 
 
-async def main():
-
-    # bot init
-    app = AppState()
-    app.init_bot()
-
-    await bot_handlers_register.register_all_handlers(app)
-    await broker_handlers_register.register_all_broker_handlers(app)
-
-    await app.broker.start()
+async def start_bot_loop(app: AppState):
+    """Auto repair cycle (parallel work)"""
 
     logger.info("Bot is running . . .")
-
     # auto repair
     while True:
         try:
@@ -29,6 +20,22 @@ async def main():
 
             app.is_ready = False    # offline ready flag
             await asyncio.sleep(30)
+
+
+async def main():
+
+    # bot init
+    app = AppState()
+    app.init_bot()
+
+    await bot_handlers_register.register_all_handlers(app)
+    await broker_handlers_register.register_all_broker_handlers(app)
+
+    # send the bot to another thread
+    asyncio.create_task(start_bot_loop(app))
+
+    # start the broker and web server in the main thread
+    await app.broker.start()
 
 
 if __name__ == "__main__":
