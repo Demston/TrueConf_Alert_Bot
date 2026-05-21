@@ -33,7 +33,6 @@ class UserManager:
         """User registration"""
 
         exists = db.query(User).filter_by(ChatID=chat_id).first()
-
         if exists:
             if exists.IsOn:
                 logger.info(f"Пользователь {author_id} уже есть в рассылке.")
@@ -45,7 +44,7 @@ class UserManager:
                 return (f'Твой логин {author_id} вновь включён в рассылку инцидентов как {user_name}.\n'
                         f'/help - помощь\n/profile - профиль')
 
-        author_id_cut = author_id.split('@')[0]  # get AD login
+        author_id_cut = author_id.split('@')[0]  # возьмем AD-логин
         author_id_cut = author_id_cut.strip()
         duty_record = db.query(Duties).filter(Duties.LoginMain == author_id_cut).first()
         if duty_record:
@@ -59,6 +58,7 @@ class UserManager:
 
     def _delete(self, db, author_id, chat_id):
         """User deletion"""
+
         exists = db.query(User).filter_by(ChatID=chat_id).first()
         if exists:
             exists.IsOn = False
