@@ -50,7 +50,7 @@ async def register(state: AppState):
 
     @state.router.message(F.text.startswith("/profile"))
     async def echo_handler(msg: Message):
-        with get_db() as db:
+        async with get_db() as db:
             # duties dates
-            dates = get_upcoming_duties(db, login=msg.author.id)
+            dates = await get_upcoming_duties(db, login=msg.author.id)
         await msg.answer(MD_PROFILE.format(msg.author.id, dates), parse_mode=ParseMode.MARKDOWN)

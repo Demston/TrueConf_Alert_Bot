@@ -11,7 +11,7 @@ async def register(state: AppState):
     @state.router.message(F.text)
     async def dialog(message: Message):
         """Messaging"""
-        # print(f"От кого пришло: {message.author.id}, ChatID {message.chat_id}") # узнать логин и ID чата
-        text = UserManager().process_message(message.author.id, message.text, message.chat_id)
-        # text = user_reg(message.text, message.author.id, message.chat_id)  # регистрируем пользователя (или удаляем)
+        # print(f"От кого пришло: {message.author.id}, ChatID {message.chat_id}") # look login and chat ID
+        text = await UserManager().process_message(message.author.id, message.text, message.chat_id)
+        # text = user_reg(message.text, message.author.id, message.chat_id)  # user registration (or deletion)
         await state.trueconf_bot.send_message(message.chat_id, text)

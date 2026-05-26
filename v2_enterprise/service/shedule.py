@@ -1,21 +1,30 @@
-from datetime import datetime
-from typing import List, Any
-from sqlalchemy.orm import Session
+# from typing import List, Any
+# from sqlalchemy.orm import Session
 from core.models import Duties
+from datetime import datetime
+from sqlalchemy.future import select
+from sqlalchemy.ext.asyncio import AsyncSession
 
 
-def get_upcoming_duties(db: Session, login: str) -> str:
+async def get_upcoming_duties(db: Session, login: str) -> str:
     """
     Searches the database for all future on-call dates for the specified login.
     Returns a sorted list of strings with dates in DD/MM/YYYY format.
     """
-    search_login = f"{login.partition('@')[0]}"
+    search_login = f"{login.partition('@')[0]}%"
     today = datetime.now().date()
     print(today)
 
-    dates_main = (db.query(Duties).filter( Duties.LoginMain.like(search_login),Duties.Date >= today).all())
-    dates_addit = (db.query(Duties).filter( Duties.LoginAdditional.
-                                            like(search_login),Duties.Date >= today).all())
+    # query: main duty
+    query_main = select(Duties).filter(Duties.LoginMain.like(search_login), Duties.Date >= today)
+    result_main = await db.execute(query_main)
+    dates_main = result_main.scalars().all()
+
+    # query: additional duty
+    query_addit = select(Duties).filter(Duties.LoginAdditional.like(search_login), Duties.Date >= today)
+    result_addit = await db.execute(query_addit)
+    dates_addit = result_addit.scalars().all()
+
     # Collecting and sorting dates
     dates_main_list = [duty.Date.strftime('%d.%m.%Y') for duty in dates_main if duty.Date]
     dates_main_list.sort()
