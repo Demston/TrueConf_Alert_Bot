@@ -9,7 +9,6 @@ from core.models import User
 from core.logger import logger
 from sqlalchemy.future import select
 
-
 # antispam dict
 ALERTS_LAST_SEND_TIME = {}
 
@@ -18,11 +17,11 @@ async def register(state: AppState):
     if getattr(state, "_check_alerts_broker_registered", False):
         return
 
-    @state.broker.subscriber(queue=state.main_rabbit_queue,  no_ack=False)
+    @state.broker.subscriber(queue=state.main_rabbit_queue, no_ack=False)
     async def task_handler(msg):
 
         current_time = datetime.now().time()
-        if not (time(9, 0) <= current_time <= time(18, 0)):     # work time (9-18)
+        if not (time(9, 0) <= current_time <= time(18, 0)):  # work time (9-18)
             return
         timestamp = datetime.now().strftime('%H:%M')
 
@@ -72,7 +71,8 @@ async def register(state: AppState):
                 if not dut:
                     continue
                 search_mask = f"{dut}%"
-                query = select(User.ChatID).where(User.Login.like(search_mask))
+                query = (select(User.ChatID).where(User.Login.like(search_mask),
+                                                   User.IsOn == True))
                 result = await db.execute(query)
                 chat_id = result.scalars().first()
 
@@ -84,9 +84,9 @@ async def register(state: AppState):
         for chat_id in duties_list_id:
             try:
                 await state.trueconf_bot.send_message(
-                        chat_id=chat_id,
-                        text=full_message,
-                        parse_mode=ParseMode.MARKDOWN
-                    )
+                    chat_id=chat_id,
+                    text=full_message,
+                    parse_mode=ParseMode.MARKDOWN
+                )
             except Exception as send_error:
                 logger.error(f" {send_error}")
