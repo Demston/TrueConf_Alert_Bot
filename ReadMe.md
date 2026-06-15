@@ -2,6 +2,7 @@
 > **An enterprise-grade, event-driven monitoring notification system powered by FastAPI, RabbitMQ, and SQLAlchemy.**
 
 ---
+[ENGLISH VERSION](#en/us) | [РУССКАЯ ВЕРСИЯ](#ru)
 
 ## [EN/US]
 
