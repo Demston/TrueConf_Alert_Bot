@@ -1,5 +1,5 @@
 import asyncio
-from core.state import AppState
+from core.state import app_state
 from core.logger import logger
 from handler import bot_handlers_register, broker_handlers_register
 import websockets
@@ -7,26 +7,25 @@ import websockets
 
 async def main():
 
-    app = AppState()
-    app.init_bot()    # bot init
+    app_state.init_bot()    # bot init
 
-    await bot_handlers_register.register_all_handlers(app)
-    await broker_handlers_register.register_all_broker_handlers(app)
+    await bot_handlers_register.register_all_handlers(app_state)
+    await broker_handlers_register.register_all_broker_handlers(app_state)
 
     logger.info("Broker is running . . .")
-    asyncio.create_task(app.broker.start())
+    asyncio.create_task(app_state.broker.start())
 
     logger.info("Bot is running . . .")
 
     while True:    # auto repair
         try:
-            await app.trueconf_bot.run()
+            await app_state.trueconf_bot.run()
 
         except (websockets.exceptions.InvalidStatus, Exception) as e:
             logger.error(f"Connection lost (Error: {e})")
             logger.info("Next attempt after 30 seconds . . .")
 
-            app.is_ready = False    # offline ready flag
+            app_state.is_ready = False    # offline ready flag
             await asyncio.sleep(30)
 
 
