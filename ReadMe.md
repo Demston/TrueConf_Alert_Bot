@@ -15,7 +15,7 @@ The project demonstrates an evolutionary path of a production-ready system, stru
 
 ---
 
-### 🏗️ Architecture & Core Design Patterns
+### 🏗️ Architecture
 The system operates as a single, cohesive asynchronous process optimized for low-resource footprints and ultra-low latency response times.
 
 * **AppState (Singleton Pattern)**: Centralized container wrapping the `Bot`, `RabbitBroker`, and routing middleware. This guarantees a single, strictly controlled communication session, fully eradicating `Session is None` or race-condition network disconnects.
@@ -43,7 +43,7 @@ The system operates as a single, cohesive asynchronous process optimized for low
 
 ## [RU]
 
-### 📌 Описание Проекта
+### 📌 Описание проекта
 Платформа автоматизирует маршрутизацию инцидентов промышленного мониторинга, перехватывая вебхуки Grafana и динамически рассылая оповещения дежурным инженерам через корпоративное API мессенджера **TrueConf**.
 
 Репозиторий наглядно демонстрирует эволюцию архитектуры реального коммерческого продукта, разделенного на два этапа:
@@ -52,7 +52,7 @@ The system operates as a single, cohesive asynchronous process optimized for low
 
 ---
 
-### 🏗️ Архитектура и Паттерны Проектирования
+### 🏗️ Архитектура
 Приложение работает в рамках единого асинхронного процесса, оптимизированного под минимальное потребление ресурсов и моментальный отклик.
 
 * **AppState (Паттерн Синглтон)**: Глобальный контейнер, управляющий жизненным циклом экземпляров `Bot` и `RabbitBroker`. Гарантирует строгий контроль сессии связи, полностью исключая ошибки инициализации и сетевые разрывы.
@@ -62,7 +62,7 @@ The system operates as a single, cohesive asynchronous process optimized for low
 
 ---
 
-### 🛡️ Промышленные Инструменты Надежности
+### 🛡️ Инструменты надежности
 * **Защита от Дублирования (Антиспам)**: Контекстный кэш в оперативной памяти (`ALERTS_LAST_SEND_TIME`), который блокирует лавинообразный спам при "мигании" метрик, но четко соблюдает интервалы повторов Графаны (10/30 минут).
 * **Фильтрация Фантомных Сообщений**: Встроенный барьер, отсекающий пустые алерты или уведомления со значением `0` до того, как приложение начнет нагружать СУБД тяжелыми запросами.
 * **Самообслуживание и Регистрация**: Реализовано автоматическое управление подписками. Дежурные могут добавлять себя в рассылку (`+`) или удалять (`-`) прямо через чат-бот, мгновенно синхронизируя данные с СУБД.
@@ -70,7 +70,7 @@ The system operates as a single, cohesive asynchronous process optimized for low
 
 ---
 
-### 🛠️ Используемый Стек Технологий
+### 🛠️ Используемый стек технологий
 * **Ядро и Асинхронность**: Python 3.11+, FastAPI, Uvicorn, Asyncio
 * **Брокер Сообщений**: RabbitMQ, FastStream
 * **Базы Данных и ORM**: MSSQL, SQLAlchemy
