@@ -33,7 +33,7 @@ The system operates as a single, cohesive asynchronous process optimized for low
 
 ---
 
-### 🛠️ Technology Stack
+### 🛠️ Tech Stack
 * **Core & Async**: Python 3.11+, FastAPI, Uvicorn, Asyncio
 * **Message Broker**: RabbitMQ, FastStream
 * **Database & ORM**: MSSQL, SQLAlchemy (ORM)
@@ -70,7 +70,7 @@ The system operates as a single, cohesive asynchronous process optimized for low
 
 ---
 
-### 🛠️ Используемый стек технологий
+### 🛠️ Технологический стек
 * **Ядро и Асинхронность**: Python 3.11+, FastAPI, Uvicorn, Asyncio
 * **Брокер Сообщений**: RabbitMQ, FastStream
 * **Базы Данных и ORM**: MSSQL, SQLAlchemy
